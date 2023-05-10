@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8" />
+  <title>Challenge: Mad Libs</title>
+ </head>
+ <body>
+
+    <h1>Mad Libs</h1>
+
+    <form id="libform">
+        <label for="noun">Noun:</label><input type="text" id="noun"><br>
+        <label for="adjective">Adjective:</label><input type="text" id="adjective"><br>
+        <label for="person">Someone's Name:</label><input type="text" id="person"><br>
+        <label for="verb">Verb:</label><input type="text" id="verb"><br>
+        <label for="place">A place:</label><input type="text" id="place"><br>
+        <button id="lib-button">Lib it!</button>
+    </form>
+
+    <p>Generated story: 
+    <span id="story"></span>
+    </p>
+
+    <script >
+        const form = document.querySelector('#libform');
+        const nounInput = document.querySelector('#noun');
+        const adjInput = document.querySelector('#adjective');
+        const personInput = document.querySelector('#person');
+        const verbInput = document.querySelector('#verb');
+        const placeInput = document.querySelector('#place');
+        const storyOutput = document.querySelector('#story');
+        const libButton = document.querySelector('#lib-button');
+        const stories = [
+  'Once upon a time, there was a {{noun}} who lived in a {{adjective}} {{place}}. {{person}} visited the {{noun}} and they decided to {{verb}} together.',
+  'There was once a {{adjective}} {{noun}} who loved to {{verb}}. {{person}} would often join in, and they would go to {{place}} to {{verb}} some more.',
+  'A long time ago, a {{noun}} was discovered in a {{place}}. {{person}} was the first to {{verb}} it, and soon everyone was talking about the {{adjective}} {{noun}}.'
+   ];
+
+
+function shuffle(array) {
+  let currentIndex = array.length;
+  let temporaryValue, randomIndex;
+
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+
+
+
+   function generateStory() {
+   const noun = nounInput.value.trim();
+   const adj = adjInput.value.trim();
+   const person = personInput.value.trim();
+   const verb = verbInput.value.trim();
+   const place = placeInput.value.trim();
+
+ 
+   if (noun && adj && person && verb && place) {
+   
+     const randomStory = shuffle(stories)[0];
+
+    
+     const newStory = randomStory
+      .replace('{{noun}}', noun)
+      .replace('{{adjective}}', adj)
+      .replace('{{person}}', person)
+      .replace('{{verb}}', verb)
+      .replace('{{place}}', place);
+
+    storyOutput.textContent = newStory;
+  } else {
+    alert('Please fill out all the inputs.');
+  }
+}
+
+
+  form.addEventListener('submit', (event) => {
+  event.preventDefault();
+  generateStory();
+   });
+
+   libButton.addEventListener('click', () => {
+   generateStory();
+});
+    </script>
+
+ </body>
+</html>

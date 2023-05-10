@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <label for="fname">First name:</label><br>
+        <input type="text" id="fname" name="fname"><br>
+        <label for="lname">Last name:</label><br>
+        <input type="text" id="lname" name="lname"><br><br>
+        <input type="submit" value="Submit" id="submit">
+      </form> 
+      <ul class="usersAnswer"></ul>
+
+      <script>
+        const form = document.querySelector('form');
+         console.log(form);
+
+        const firstNameInput = document.querySelector('#fname');
+        const lastNameInput = document.querySelector('#lname');
+        console.log(firstNameInput, lastNameInput);
+
+        const firstNameInputByName = document.querySelector('input[name="fname"]');
+        const lastNameInputByName = document.querySelector('input[name="lname"]');
+         console.log(firstNameInputByName, lastNameInputByName);
+
+        const ul = document.querySelector('.usersAnswer');
+
+        form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const firstNameValue = firstNameInput.value;
+        const lastNameValue = lastNameInput.value;
+
+        if (firstNameValue.trim() === '' || lastNameValue.trim() === '') {
+              return;}
+
+
+        const firstNameLi = document.createElement('li');
+        const lastNameLi = document.createElement('li');
+
+       firstNameLi.textContent = firstNameValue;
+       lastNameLi.textContent = lastNameValue;
+
+       ul.appendChild(firstNameLi);
+       ul.appendChild(lastNameLi);
+
+    firstNameInput.value = '';
+    lastNameInput.value = '';
+});
+
+
+
+
+
+      </script>
+</body>
+</html>
